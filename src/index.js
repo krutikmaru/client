@@ -1,17 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { UserProvider } from "./contexts/UserContext";
+import { BrowserRouter } from "react-router-dom";
+import { BackpackProvider } from "./contexts/BackpackContext";
+import { TshirtProvider } from "./contexts/TshirtContext";
+import { CartProvider } from "./contexts/CartContext";
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <>
+    <GoogleOAuthProvider clientId="126349152492-1jmjqc5occgb4lf08shiap4st75fosmr.apps.googleusercontent.com">
+      <React.StrictMode>
+        <BrowserRouter>
+          <UserProvider>
+            <CartProvider>
+              <BackpackProvider>
+                <TshirtProvider>
+                  <App />
+                </TshirtProvider>
+              </BackpackProvider>
+            </CartProvider>
+          </UserProvider>
+        </BrowserRouter>
+      </React.StrictMode>
+    </GoogleOAuthProvider>
+  </>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
